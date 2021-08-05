@@ -51,6 +51,10 @@ def package_list_exist(file_path):
     return False
 
 
+def read_package_list(args):
+    return fu.read_csv_to_list(args.listpath)
+
+
 def set_argparser():
     parser = argparse.ArgumentParser()
     parser.add_argument('--list-path', type=str, default='dataset/popular_apps', dest='listpath',
@@ -66,8 +70,12 @@ def main():
     init()
     args = set_argparser()
 
-    # Get package list
+    # Get package list to file
     get_package_lists(args)
+
+    # Read package list
+    package_list = read_package_list(args)
+
 
 
 

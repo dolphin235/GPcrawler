@@ -13,7 +13,7 @@ g_androidrank_url = "https://www.androidrank.org"
 g_popular_apps = "android-most-popular-google-play-apps"
 g_category_url = "android-most-popular-google-play-apps?category="
 
-g_category_list =  ["ART_AND_DESIGN", "AUTO_AND_VEHICLES", "BEAUTY", "BOOKS_AND_REFERENCE", "BUSINESS", "COMICS", "COMMUNICATION", "DATING", "EDUCATION", "ENTERTAINMENT", "EVENTS", "FINANCE", "FOOD_AND_DRINK", "HEALTH_AND_FITNESS", "HOUSE_AND_HOME", "LIBRARIES_AND_DEMO", "LIFESTYLE", "MAPS_AND_NAVIGATION", "MEDICAL", "MUSIC_AND_AUDIO", "NEWS_AND_MAGAZINES", "PARENTING", "PERSONALIZATION", "PHOTOGRAPHY", "PRODUCTIVITY", "SHOPPING", "SOCIAL", "SPORTS", "TOOLS", "TRANSPORTATION", "TRAVEL_AND_LOCAL", "VIDEO_PLAYERS", "WEATHER", "GAME_ACTION", "GAME_ADVENTURE", "GAME_ARCADE", "GAME_BOARD", "GAME_CARD", "GAME_CASINO", "GAME_CASUAL", "GAME_EDUCATIONAL", "GAME_FAMILY", "GAME_MUSIC", "GAME_PUZZLE", "GAME_RACING", "GAME_ROLE_PLAYING", "GAME_SIMULATION", "GAME_SPORTS", "GAME_STRATEGY", "GAME_TRIVIA", "GAME_WORD" ]
+g_category_list =  ["ART_AND_DESIGN", "AUTO_AND_VEHICLES", "BEAUTY", "BOOKS_AND_REFERENCE", "BUSINESS", "COMICS", "COMMUNICATION", "DATING", "EDUCATION", "ENTERTAINMENT", "EVENTS", "FINANCE", "FOOD_AND_DRINK", "HEALTH_AND_FITNESS", "HOUSE_AND_HOME", "LIBRARIES_AND_DEMO", "LIFESTYLE", "MAPS_AND_NAVIGATION", "MEDICAL", "MUSIC_AND_AUDIO", "NEWS_AND_MAGAZINES", "PARENTING", "PERSONALIZATION", "PHOTOGRAPHY", "PRODUCTIVITY", "SHOPPING", "SOCIAL", "SPORTS", "TOOLS", "TRANSPORTATION", "TRAVEL_AND_LOCAL", "VIDEO_PLAYERS", "WEATHER", "GAME_ACTION", "GAME_ADVENTURE", "GAME_ARCADE", "GAME_BOARD", "GAME_CARD", "GAME_CASINO", "GAME_CASUAL", "GAME_EDUCATIONAL", "GAME_FAMILY", "GAME_MUSIC", "GAME_PUZZLE", "GAME_RACING", "GAME_ROLE_PLAYING", "GAME_SIMULATION", "GAME_SPORTS", "GAME_STRATEGY", "GAME_TRIVIA", "GAME_WORD"]
 
 
 
@@ -29,7 +29,7 @@ class AndroidrankListCollector(AppListCollector):
         for category in g_category_list:
             print(category)
             package_names.extend(cls.get_list(g_androidrank_url+'/'+g_category_url+category))
-            time.sleep(3)
+            time.sleep(30)
         return package_names
 
 
@@ -43,6 +43,7 @@ class AndroidrankListCollector(AppListCollector):
         package_names = []
         next_url = first_url
         while(next_url != None):
+            time.sleep(5)
             response = cm.get_url(next_url)
             html = response.text
             soup = BeautifulSoup(html, 'html.parser')

@@ -18,3 +18,17 @@ def list_to_csv(input_list):
     for l in input_list:
         res_text = res_text + l + ','
     return res_text[:-1]
+
+
+def read_csv_to_list(file_path):
+    res_list = []
+    f = open(file_path, 'r')
+    while True:
+        line = f.readline().rstrip('\n')
+        if line:
+            line_list = line.split(',')
+            res_list.extend(line_list)
+        else:
+            break
+    return res_list
+
