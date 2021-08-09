@@ -5,6 +5,7 @@ import os
 import crawler.common as cm
 import crawler.applist.android_rank_list as android_rank
 import crawler.file_util as fu
+import crawler.app_info_crawler as aic
 
 
 DATASET_DIR_NAME = 'dataset/'
@@ -75,6 +76,10 @@ def main():
 
     # Read package list
     package_list = read_package_list(args)
+
+    for package_name in package_list:
+        crawler = aic.AppInfoCrawler(package_name)
+        exit()
 
 
 
