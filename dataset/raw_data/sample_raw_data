@@ -1,0 +1,17 @@
+&&&&&package_name
+com.facebook.katana
+&&&&&category
+social
+&&&&&description
+Keeping up with friends is faster and easier than ever. Share updates and photos, engage with friends and Pages, and stay connected to communities important to you.
+
+Features on the Facebook app include:
+
+* Connect with friends and family and meet new people on your social media network
+
+&&&&&permission
+Camera:take pictures and videos
+&&&&&privacy_policy
+<html lang="ko" id="facebook" class="tinyViewport tinyWidth">
+<head>...
+&&&&&end
