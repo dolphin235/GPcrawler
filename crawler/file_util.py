@@ -1,7 +1,7 @@
 #!/bin/user/python3
 
 def wrtie_text_to_file(file_path, text):
-    f = open(file_path, mode='x', encoding='utf-8')
+    f = open(file_path, mode='w', encoding='utf-8')
     f.write(text)
     f.close()
 
