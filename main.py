@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 import argparse
 import os
+import time
+from datetime import datetime
 
 import crawler.common as cm
 import crawler.applist.android_rank_list as android_rank
@@ -9,6 +11,7 @@ import crawler.app_info_crawler as aic
 
 
 DATASET_DIR_NAME = 'dataset/'
+RAW_DATA_DIR = DATASET_DIR_NAME + 'raw_data/'
 g_home_path = ''
 
 LISTRANGE_TYPE = ['all', 'popular']
@@ -33,6 +36,7 @@ def init():
 
 def get_package_lists(args):
     if package_list_exist(args.listpath) == True:
+        print("[INFO] package list exist, skip get list process")
         return
 
     if args.listrange == 'all':
@@ -54,6 +58,14 @@ def package_list_exist(file_path):
 
 def read_package_list(args):
     return fu.read_csv_to_list(args.listpath)
+
+
+def is_exist(file_name):
+    if os.path.isfile(RAW_DATA_DIR + file_name):
+        print(f"[INFO] file {file_name} exist")
+        return True
+    else:
+        return False
 
 
 def set_argparser():
@@ -78,10 +90,10 @@ def main():
     package_list = read_package_list(args)
 
     for package_name in package_list:
-        crawler = aic.AppInfoCrawler(package_name)
-        exit()
-
-
+        print(f"\n[INFO] Get information - [{package_name}] : ["+str(datetime.fromtimestamp(time.time()))+"]")
+        if is_exist(package_name):
+            continue
+        crawler = aic.AppInfoCrawler(package_name, RAW_DATA_DIR)
 
 
     print("[INFO] finish successfully")
