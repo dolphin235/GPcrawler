@@ -70,7 +70,7 @@ def is_exist(file_name):
 
 def set_argparser():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--list-path', type=str, default='dataset/popular_apps', dest='listpath',
+    parser.add_argument('--list-path', type=str, default='dataset/app_list', dest='listpath',
                         help='enter package list file path')
     parser.add_argument('--list-range', type=str, default='popular', dest='listrange', choices=LISTRANGE_TYPE,
                         help='choose range of list')
@@ -87,6 +87,7 @@ def main():
     get_package_lists(args)
 
     # Read package list
+    print("[INFO] read package lists")
     package_list = read_package_list(args)
 
     for package_name in package_list:

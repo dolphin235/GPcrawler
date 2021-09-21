@@ -2,6 +2,7 @@
 import requests
 import time
 import urllib.request
+import socket
 
 MAX_RETRY = 3
 
@@ -17,15 +18,16 @@ def request_url(url):
         try:
             headers = {'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36'}
             #response = requests.get(url, headers=headers)
-            response = urllib.request.urlopen(url)
+            req = urllib.request.Request(url, headers=headers)
+            response = urllib.request.urlopen(req, timeout=20)
             if response.status == 200:
                 return response
             else:
                 print(f"[ERROR] Get url fail response: [{response.status_code}] - [{url}]")
                 raise
         except Exception as err:
-            print(err)
+            print("[ERROR]" + str(err))
             print(f"[ERROR] Get url fail - [{url}]")
             time.sleep(60)
-        count = count + 1
+            count = count + 1
 

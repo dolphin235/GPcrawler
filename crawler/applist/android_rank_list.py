@@ -45,7 +45,7 @@ class AndroidrankListCollector(AppListCollector):
         while(next_url != None):
             time.sleep(5)
             response = cm.get_url(next_url)
-            html = response.text
+            html = response.read()
             soup = BeautifulSoup(html, 'html.parser')
             package_names.extend(cls.find_package_names(soup))
 

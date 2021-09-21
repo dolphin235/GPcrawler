@@ -78,9 +78,10 @@ class AppInfoCrawler:
             if tag.text == "Privacy Policy":
                 privacy_policy_url = tag.get('href')
         try:
+            print("[DEBUG] privacy policy url :"+privacy_policy_url)
             response = cm.get_url(privacy_policy_url)
             time.sleep(3)
-            privacy_policy = response.read().text
+            privacy_policy = response.read()
         except Exception as e:
             print("[ERROR] "+str(e))
             print("[ERROR] get privacy policy fail")
@@ -99,7 +100,7 @@ class AppInfoCrawler:
         for l in self.permission:
             text = text + l + '\n'
         text = text + DELIMITER + 'privacy_policy' + '\n'
-        text = text + self.privacy_policy + '\n'
+        text = text + str(self.privacy_policy) + '\n'
         text = text + DELIMITER + 'end'
         fu.wrtie_text_to_file(dir_path + self.package_name, text)
 
