@@ -53,20 +53,24 @@ class AppInfoCrawler:
 
     def get_permission(self):
         permission = []
-        driver = self.set_webdriver(WEBDRIVER_PATH)
-        driver.get(AppInfoCrawler.google_play_detail_url+self.package_name)
-        objs = driver.find_elements_by_class_name('hrTbp')
-        for obj in objs:
-            if obj.text == "View details":
-                obj.click()
-                driver.implicitly_wait(1)
-                units = driver.find_elements_by_class_name('itQHhe')
-                for unit in units:
-                    per_category = unit.find_element_by_class_name('SoU6Qc').text
-                    per_contents = unit.find_elements_by_class_name('BCMWSd')
-                    for content in per_contents:
-                        permission.append(per_category+':'+content.text)
-        driver.quit()
+        try:
+            driver = self.set_webdriver(WEBDRIVER_PATH)
+            driver.get(AppInfoCrawler.google_play_detail_url+self.package_name)
+            objs = driver.find_elements_by_class_name('hrTbp')
+            for obj in objs:
+                if obj.text == "View details":
+                    obj.click()
+                    driver.implicitly_wait(1)
+                    units = driver.find_elements_by_class_name('itQHhe')
+                    for unit in units:
+                        per_category = unit.find_element_by_class_name('SoU6Qc').text
+                        per_contents = unit.find_elements_by_class_name('BCMWSd')
+                        for content in per_contents:
+                            permission.append(per_category+':'+content.text)
+            driver.quit()
+        except Exception as e:
+            print("[ERROR] webdriver error")
+            print("{"+str(e)+"}")
         return permission
 
 
